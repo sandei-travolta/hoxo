@@ -9,6 +9,7 @@ abstract final class AppColors{
   static const onError=Colors.red;
   static const blue1=Color(0xFF01491BB);
   static const blue2=Color(0xFF074053);
+  static const blue3=Color(0xFF0CCCEB);
   
   static const lightColorScheme=ColorScheme(
     brightness: .light, 

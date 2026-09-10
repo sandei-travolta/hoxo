@@ -5,7 +5,7 @@ import 'package:hoxo/ui/themes/colors.dart';
 abstract final class AppTheme{
   static const  _textTheme=TextTheme(
     headlineLarge: TextStyle(
-      fontSize: 32,fontWeight: .w500
+      fontSize: 34.0,fontWeight: .w700,color: AppColors.blue2
     ),
     
   );

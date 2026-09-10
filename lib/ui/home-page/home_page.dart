@@ -6,11 +6,14 @@ class HomePage extends StatelessWidget {
   final Widget child;
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Sidebar(),
-        Expanded(child: child)
-      ],
+    return Scaffold(
+      body: Row(
+        children: [
+          Sidebar(),
+          const SizedBox(width: 15.0),
+          Expanded(child: child)
+        ],
+      ),
     );
   }
 }
