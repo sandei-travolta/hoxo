@@ -1,4 +1,5 @@
 class Routes {
   static const landingPage="/";
-  static const homePage="/home";
+  static const dashboard="/home/dashboard";
+  static const clients="/home/clients";
 }

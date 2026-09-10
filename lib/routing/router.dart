@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hoxo/routing/routes.dart';
+import 'package:hoxo/ui/clients/clients_page.dart';
+import 'package:hoxo/ui/dashboard/dashboard_page.dart';
 import 'package:hoxo/ui/home-page/home_page.dart';
 import 'package:hoxo/ui/landing-page/landing_page.dart';
 
@@ -11,11 +13,10 @@ final GoRouter goRouter=GoRouter(
       path: Routes.landingPage,
       builder: (context,state)=>LandingPage()
       ),
-    GoRoute(
-      path: Routes.homePage,
-      pageBuilder: (context,state){
+    ShellRoute(
+      pageBuilder: (context,state,child){
         return CustomTransitionPage(
-          child: const HomePage(), 
+          child: HomePage(child: child), 
           transitionsBuilder: (
             context,
             animation,
@@ -37,7 +38,16 @@ final GoRouter goRouter=GoRouter(
                   child: child)
                   );
             });
-      }
-      )  
+      },
+      routes: [
+        GoRoute(
+          path: Routes.dashboard,
+          builder: (context,state)=>DashboardPage()
+          ),
+        GoRoute(
+          path: Routes.clients,
+          builder: (context,state)=>ClientsPage()
+          )  
+      ]),
   ]
 );

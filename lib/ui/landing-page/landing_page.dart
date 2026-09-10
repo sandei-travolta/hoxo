@@ -41,7 +41,7 @@ with SingleTickerProviderStateMixin{
              ));
       _animationController.forward().then((_){
         if(!mounted) return;
-        context.go(Routes.homePage);
+        context.go(Routes.dashboard);
       });
   }
   @override
