@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hoxo/routing/routes.dart';
 import 'package:hoxo/ui/home-page/home_page.dart';
@@ -12,7 +13,31 @@ final GoRouter goRouter=GoRouter(
       ),
     GoRoute(
       path: Routes.homePage,
-      builder: (context,state)=>HomePage()
+      pageBuilder: (context,state){
+        return CustomTransitionPage(
+          child: const HomePage(), 
+          transitionsBuilder: (
+            context,
+            animation,
+            secondarAnimation,
+            child
+            ){
+              final slideAnimation=Tween<Offset>(
+                begin: const Offset(0, 0.2),
+                end: Offset.zero
+              ).animate(
+                CurvedAnimation(
+                  parent: animation, 
+                  curve: Curves.easeOut)
+                  );
+              return FadeTransition(
+                opacity: animation,
+                child: SlideTransition(
+                  position: slideAnimation,
+                  child: child)
+                  );
+            });
+      }
       )  
   ]
 );
