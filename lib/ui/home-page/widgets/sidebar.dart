@@ -10,7 +10,7 @@ class Sidebar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: .symmetric(horizontal: 5.0),
+      
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.primary,
         boxShadow: [

@@ -25,18 +25,19 @@ class _SideNavItemState extends State<SideNavItem> {
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
     final currentPath = GoRouterState.of(context).uri.path;
+    //check if is currwent path
     final isActive = currentPath == widget.path;
 
     final Color backgroundColor;
     final Color foregroundColor;
     if (isActive) {
       backgroundColor = _isHovering
-          ? AppColors.blue3.withOpacity(0.6)
-          : AppColors.blue3;
+          ? Color(0xFF2CBA7A).withOpacity(0.8)
+          : Color(0xFF2CBA7A);
       foregroundColor = colorScheme.onPrimary;
     } else if (_isHovering) {
       backgroundColor = _isHovering
-          ? AppColors.blue3
+          ? Color(0xFFF6F6F6)
           : colorScheme.primary;
       foregroundColor = colorScheme.primary;
     } else {
@@ -50,7 +51,6 @@ class _SideNavItemState extends State<SideNavItem> {
         onEnter: (_) => setState(() => _isHovering = true),
         onExit: (_) => setState(() => _isHovering = false),
         child: InkWell(
-          borderRadius: BorderRadius.circular(12.0),
           onTap: () => context.go(widget.path),
           child: AnimatedContainer(
             duration: const Duration(milliseconds: 200),
@@ -60,21 +60,8 @@ class _SideNavItemState extends State<SideNavItem> {
             transformAlignment: Alignment.center,
             decoration: BoxDecoration(
               color: backgroundColor,
-              borderRadius: const BorderRadius.all(Radius.circular(12.0)),
-              boxShadow:  [
-                      BoxShadow(
-                        color: const Color.fromRGBO(60, 64, 67, 0.3),
-                        blurRadius: 4,
-                        spreadRadius: 0,
-                        offset: const Offset(0, 1),
-                      ),
-                      BoxShadow(
-                        color: const Color.fromRGBO(60, 64, 67, 0.15),
-                        blurRadius: 10,
-                        spreadRadius: 3,
-                        offset: const Offset(0, 2),
-                      ),
-                    ]
+              borderRadius: const BorderRadius.all(Radius.circular(8.0)),
+              
             ),
             padding:
                 const EdgeInsets.symmetric(vertical: 8.0, horizontal: 15.0),
