@@ -26,11 +26,13 @@ class Sidebar extends StatelessWidget {
       width: 230.0,
       child: Column(
         children: [
+          const SizedBox(height: 30.0),
           Text("hoxo",style: Theme.of(context).textTheme.headlineLarge),
-          const SizedBox(height: 50.0),
+          const SizedBox(height: 30.0),
           SideNavItem(path: Routes.dashboard, label: 'DashBoard',icon: Icons.home_outlined),
           const SizedBox(height: 15),
           SideNavItem(path: Routes.clients, label: 'Clients',icon: Icons.people),
+          SideNavItem(path: Routes.projects, label: 'Projects',icon: Icons.work,)
         ],
       ),
     );

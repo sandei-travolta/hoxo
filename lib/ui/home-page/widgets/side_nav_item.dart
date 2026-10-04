@@ -69,6 +69,7 @@ class _SideNavItemState extends State<SideNavItem> {
               children: [
                 Icon(
                   widget.icon,
+                  color: isActive? Colors.white:Colors.black,
                 ),
                 const SizedBox(width: 15.0),
                 Text(

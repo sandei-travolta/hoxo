@@ -5,6 +5,7 @@ import 'package:hoxo/ui/clients/clients_page.dart';
 import 'package:hoxo/ui/dashboard/dashboard_page.dart';
 import 'package:hoxo/ui/home-page/home_page.dart';
 import 'package:hoxo/ui/landing-page/landing_page.dart';
+import 'package:hoxo/ui/projects/projects_screen.dart';
 
 final GoRouter goRouter = GoRouter(
   initialLocation: Routes.landingPage,
@@ -38,6 +39,15 @@ final GoRouter goRouter = GoRouter(
             );
           },
         ),
+        GoRoute(
+          path: Routes.projects,
+          pageBuilder: (context, state) {
+            return _buildPage(
+              key: state.pageKey, 
+              child: ProjectsScreen()
+              );
+          },
+          )
       ],
     ),
   ],
