@@ -17,12 +17,14 @@ final List<Project> dummyProjects = [
       'Write three case studies',
       'Compress hero images',
     ],
-    milestone: Milestone(
+    milestone: [
+      Milestone(
       start: _now.subtract(const Duration(days: 12)),
       end: _now.add(const Duration(days: 9)),
       title: 'Design approved',
       description: 'Finish the home and case study layouts and get sign-off.',
     ),
+    ]
   ),
   Project(
     title: 'Clinic Booking App',
@@ -34,12 +36,14 @@ final List<Project> dummyProjects = [
       'Confirm SMS provider pricing',
       'Send the invoice for phase 1',
     ],
-    milestone: Milestone(
+    milestone: [
+      Milestone(
       start: _now.subtract(const Duration(days: 30)),
       end: _now.add(const Duration(days: 4)),
       title: 'Beta release',
       description: 'Booking flow, reminders and admin dashboard ready for testers.',
     ),
+    ]
   ),
   Project(
     title: 'Budget Tracker',
@@ -47,12 +51,14 @@ final List<Project> dummyProjects = [
         'Small offline-first app to log daily spending and see monthly summaries by category.',
     type: 'Personal',
     notes: ['Decide between Isar and Drift'],
-    milestone: Milestone(
+    milestone: [
+      Milestone(
       start: _now.add(const Duration(days: 3)),
       end: _now.add(const Duration(days: 24)),
       title: 'Data layer',
       description: 'Local database, models and repository tests.',
     ),
+    ]
   ),
   Project(
     title: 'School Fees Portal',
@@ -65,12 +71,14 @@ final List<Project> dummyProjects = [
       'Printable receipts',
       'Deploy to staging for review',
     ],
-    milestone: Milestone(
-      start: _now.subtract(const Duration(days: 45)),
-      end: _now.subtract(const Duration(days: 3)),
-      title: 'Payments integration',
-      description: 'Connect the payment gateway and reconcile transactions.',
+    milestone: [
+      Milestone(
+      start: _now.add(const Duration(days: 3)),
+      end: _now.add(const Duration(days: 24)),
+      title: 'Data layer',
+      description: 'Local database, models and repository tests.',
     ),
+    ]
   ),
 ];
 
@@ -398,7 +406,7 @@ class _ProjectTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final scheme = Theme.of(context).colorScheme;
     final text = Theme.of(context).textTheme;
-    final overdue = _isOverdue(project.milestone);
+    final overdue = _isOverdue(project.milestone[0]);
 
     return Material(
       color: selected ? scheme.secondaryContainer : scheme.surface,
@@ -444,7 +452,7 @@ class _ProjectTile extends StatelessWidget {
               ClipRRect(
                 borderRadius: BorderRadius.circular(4),
                 child: LinearProgressIndicator(
-                  value: _progress(project.milestone),
+                  value: _progress(project.milestone[0]),
                   minHeight: 5,
                   color: overdue ? scheme.error : scheme.secondary,
                   backgroundColor: scheme.surfaceContainerHighest,
@@ -455,14 +463,14 @@ class _ProjectTile extends StatelessWidget {
                 children: [
                   Expanded(
                     child: Text(
-                      project.milestone.title,
+                      project.milestone[0].title,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: text.bodySmall,
                     ),
                   ),
                   Text(
-                    _timeLeft(project.milestone),
+                    _timeLeft(project.milestone[0]),
                     style: text.bodySmall?.copyWith(
                       color: overdue ? scheme.error : scheme.onSurfaceVariant,
                       fontWeight: overdue ? FontWeight.w600 : null,
@@ -586,7 +594,7 @@ class _ProjectTable extends StatelessWidget {
                 itemBuilder: (context, i) {
                   final p = projects[i];
                   final isSel = identical(p, selected);
-                  final overdue = _isOverdue(p.milestone);
+                  final overdue = _isOverdue(p.milestone[0]);
                   final fg = isSel ? scheme.onSecondary : scheme.onSurface;
                   final muted =
                       isSel ? scheme.onSecondary : scheme.onSurfaceVariant;
@@ -595,7 +603,7 @@ class _ProjectTable extends StatelessWidget {
                       : (i.isOdd
                           ? scheme.secondary.withValues(alpha: 0.06)
                           : Colors.transparent);
-                  final pct = (_progress(p.milestone) * 100).round();
+                  final pct = (_progress(p.milestone[0]) * 100).round();
 
                   return Padding(
                     padding: const EdgeInsets.symmetric(vertical: 1),
@@ -649,7 +657,7 @@ class _ProjectTable extends StatelessWidget {
                                       style: text.bodySmall?.copyWith(color: fg))
                                   : _TypeChip(type: p.type),
                               milestone: Text(
-                                p.milestone.title,
+                                p.milestone[0].title,
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
                                 style: text.bodyMedium?.copyWith(color: fg),
@@ -662,7 +670,7 @@ class _ProjectTable extends StatelessWidget {
                                             borderRadius:
                                                 BorderRadius.circular(4),
                                             child: LinearProgressIndicator(
-                                              value: _progress(p.milestone),
+                                              value: _progress(p.milestone[0]),
                                               minHeight: 6,
                                               color: isSel
                                                   ? scheme.onSecondary
@@ -692,7 +700,7 @@ class _ProjectTable extends StatelessWidget {
                                   : null,
                               due: showDue
                                   ? Text(
-                                      _formatDate(p.milestone.end),
+                                      _formatDate(p.milestone[0].end),
                                       style: text.bodySmall?.copyWith(
                                         color: overdue && !isSel
                                             ? scheme.error
@@ -732,8 +740,8 @@ class ProjectDetail extends StatelessWidget {
     final scheme = Theme.of(context).colorScheme;
     final text = Theme.of(context).textTheme;
     final m = project.milestone;
-    final overdue = _isOverdue(m);
-    final pct = (_progress(m) * 100).round();
+    final overdue = _isOverdue(m[0]);
+    final pct = (_progress(m[0]) * 100).round();
 
     return SingleChildScrollView(
       padding: const EdgeInsets.fromLTRB(24, 8, 24, 96),
@@ -783,8 +791,8 @@ class ProjectDetail extends StatelessWidget {
 
           Row(
             children: [
-              Expanded(child: _Info('Start date', _formatDate(m.start))),
-              Expanded(child: _Info('Due date', _formatDate(m.end))),
+              Expanded(child: _Info('Start date', _formatDate(m[0].start))),
+              Expanded(child: _Info('Due date', _formatDate(m[0].end))),
             ],
           ),
           const SizedBox(height: 16),
@@ -794,7 +802,7 @@ class ProjectDetail extends StatelessWidget {
               Expanded(
                 child: _Info(
                   'Status',
-                  _timeLeft(m),
+                  _timeLeft(m[0]),
                   color: overdue ? scheme.error : null,
                 ),
               ),
@@ -814,13 +822,13 @@ class ProjectDetail extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  m.title,
+                  m[0].title,
                   style:
                       text.titleSmall?.copyWith(fontWeight: FontWeight.w600),
                 ),
                 const SizedBox(height: 4),
                 Text(
-                  m.description,
+                  m[0].description,
                   style: text.bodySmall
                       ?.copyWith(color: scheme.onSurfaceVariant),
                 ),
@@ -828,7 +836,7 @@ class ProjectDetail extends StatelessWidget {
                 ClipRRect(
                   borderRadius: BorderRadius.circular(4),
                   child: LinearProgressIndicator(
-                    value: _progress(m),
+                    value: _progress(m[0]),
                     minHeight: 8,
                     color: overdue ? scheme.error : scheme.secondary,
                     backgroundColor: scheme.surfaceContainerHighest,

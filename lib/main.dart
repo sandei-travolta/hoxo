@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:hoxo/routing/router.dart';
 import 'package:hoxo/ui/themes/theme.dart';
+import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
 void main() {
+  sqfliteFfiInit();
+  databaseFactory = databaseFactoryFfi;
   runApp(const MyApp());
 }
 

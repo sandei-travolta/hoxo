@@ -1,4 +1,5 @@
 class Client {
+  final int? id;
   final String name;
   final String mobile;
   final String email;
@@ -10,5 +11,16 @@ class Client {
   final List<String> notes;
   final String status;
 
-  Client({required this.name, required this.mobile, required this.email, required this.twitter, required this.instagram, required this.facebook, required this.website, required this.description, required this.notes, required this.status});
+  Client({
+    required this.name, 
+    required this.mobile, 
+    required this.email, 
+    required this.twitter, 
+    required this.instagram, 
+    required this.facebook, 
+    required this.website, 
+    required this.description, 
+    required this.notes, 
+    required this.status, 
+    this.id});
 }
