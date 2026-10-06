@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:hoxo/ui/themes/colors.dart';
 
 class SideNavItem extends StatefulWidget {
   const SideNavItem({
