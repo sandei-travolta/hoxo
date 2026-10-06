@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hoxo/data/models/clients.dart';
 
+import 'widgets/add_client_form.dart';
+
 /// Dummy data.
 final List<Client> dummyClients = [
   Client(
@@ -136,8 +138,8 @@ class _ClientsPageState extends State<ClientsPage> {
           _filter == 'All' || c.status.toLowerCase() == _filter.toLowerCase();
       final queryOk = q.isEmpty ||
           c.name.toLowerCase().contains(q) ||
-          c.email.toLowerCase().contains(q) ||
-          c.mobile.contains(q) ||
+          c.email!.toLowerCase().contains(q) ||
+          c.mobile!.contains(q) ||
           c.description.toLowerCase().contains(q);
       return statusOk && queryOk;
     }).toList();
@@ -170,8 +172,8 @@ class _ClientsPageState extends State<ClientsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          // TODO: open your create client form here.
+        onPressed: () async{
+          await addClientForm(context);
         },
         backgroundColor: Theme.of(context).colorScheme.secondary,
         tooltip: "Add Client",
@@ -491,7 +493,7 @@ class _ClientTable extends StatelessWidget {
                                   : _StatusChip(status: cl.status),
                               mobile: showMobile
                                   ? Text(
-                                      cl.mobile,
+                                      cl.mobile??"No mobile",
                                       maxLines: 1,
                                       overflow: TextOverflow.ellipsis,
                                       style: text.bodySmall
@@ -500,7 +502,7 @@ class _ClientTable extends StatelessWidget {
                                   : null,
                               email: showEmail
                                   ? Text(
-                                      cl.email,
+                                      cl.email??"No email",
                                       maxLines: 1,
                                       overflow: TextOverflow.ellipsis,
                                       style: text.bodySmall
@@ -585,12 +587,12 @@ class _ClientTile extends StatelessWidget {
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      client.mobile,
+                      client.mobile??"No mobile",
                       style: text.bodySmall
                           ?.copyWith(color: scheme.onSurfaceVariant),
                     ),
                     Text(
-                      client.email,
+                      client.email??"No Email",
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: text.bodySmall
@@ -666,9 +668,9 @@ class ClientDetail extends StatelessWidget {
 
     final contacts = <_ContactRow>[
       _ContactRow(
-          icon: Icons.phone_outlined, label: 'Mobile', value: client.mobile),
+          icon: Icons.phone_outlined, label: 'Mobile', value: client.mobile??"no contact"),
       _ContactRow(
-          icon: Icons.mail_outline_rounded, label: 'Email', value: client.email),
+          icon: Icons.mail_outline_rounded, label: 'Email', value: client.email??"no email yet"),
       if (_has(client.website))
         _ContactRow(
             icon: Icons.language_rounded,

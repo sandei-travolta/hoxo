@@ -1,8 +1,8 @@
 class Client {
   final int? id;
   final String name;
-  final String mobile;
-  final String email;
+  final String? mobile;
+  final String? email;
   final String? twitter;
   final String? instagram;
   final String? facebook;
@@ -13,12 +13,12 @@ class Client {
 
   Client({
     required this.name, 
-    required this.mobile, 
-    required this.email, 
-    required this.twitter, 
-    required this.instagram, 
-    required this.facebook, 
-    required this.website, 
+    this.mobile, 
+    this.email, 
+    this.twitter, 
+    this.instagram, 
+    this.facebook, 
+    this.website, 
     required this.description, 
     required this.notes, 
     required this.status, 
