@@ -5,8 +5,8 @@ abstract final class AppColors{
   static const onPrimary=Colors.black12;
   static const secondary=Color(0xFF0AB9F3);
   static const onSecondary=Colors.red;
-  static const error=Colors.white;
-  static const onError=Colors.red;
+  static const onError=Colors.white;
+  static const error=Colors.red;
   static const blue1=Color(0xFF01491BB);
   static const blue2=Color(0xFF074053);
   static const blue3=Color(0xFF0CCCEB);
